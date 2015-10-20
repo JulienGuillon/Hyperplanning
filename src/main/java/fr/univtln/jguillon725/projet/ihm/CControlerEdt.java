@@ -1,5 +1,6 @@
 package fr.univtln.jguillon725.projet.ihm;
 
+import fr.univtln.jguillon725.projet.CProfileGui;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
@@ -34,7 +35,7 @@ public class CControlerEdt {
     public void getProfile (){
         this.viewEdt.setVisible(false);
         CModelProfile cModelProfile = CModelProfile.getInstance();
-        viewEdt = new CViewProfile(cModelProfile);
+        viewEdt = new CProfileGui();
         this.viewEdt.setVisible(true);
     }
 }
