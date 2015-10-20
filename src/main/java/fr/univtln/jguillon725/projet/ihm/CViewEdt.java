@@ -56,7 +56,6 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         c.weightx = 1;
         panelInformation.add(this.connectionJLabel, c);
 
-
         GridLayout gridLayout = new GridLayout(24,1);
         gridLayout.setHgap(5);
         JPanel panel = new JPanel(gridLayout);
@@ -68,7 +67,6 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
             panel.add(new JLabel(s));
         }
         panelPlanning.add(panel);
-
 
         for (int j=1; j<7; j++)
         {
@@ -121,6 +119,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         });
         panelChoice.add(buttonNotification);
 
+        // TEST pour savoir comment modifier la couleur et ajouter des cours
         listPlanning.get(0).get(0).setText("Math");
         listPlanning.get(0).get(0).setBackground(Color.red);
         listPlanning.get(0).get(1).setBackground(Color.red);

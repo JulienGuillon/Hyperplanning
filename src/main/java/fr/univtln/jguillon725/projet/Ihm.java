@@ -22,4 +22,5 @@ public class Ihm
         } catch (ConfigImportException e) {
             e.printStackTrace();
         }
-    }}
+    }
+}
