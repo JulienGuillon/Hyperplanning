@@ -4,24 +4,24 @@ package fr.univtln.jguillon725.projet.model.entities;
  * Created by julien on 20/10/15.
  */
 public class CRoom {
-    private String numBatiment;
+    private String batiment;
     private int numRoom;
     private String typeOfRoom;
     private int capacity;
 
-    public CRoom(String numBatiment, int numRoom, String typeOfRoom, int capacity) {
-        this.numBatiment = numBatiment;
+    public CRoom(String batiment, int numRoom, String typeOfRoom, int capacity) {
+        this.batiment = batiment;
         this.numRoom = numRoom;
         this.typeOfRoom = typeOfRoom;
         this.capacity = capacity;
     }
 
     public String getNumBatiment() {
-        return numBatiment;
+        return batiment;
     }
 
     public void setNumBatiment(String numBatiment) {
-        this.numBatiment = numBatiment;
+        this.batiment = numBatiment;
     }
 
     public int getNumRoom() {
@@ -57,14 +57,14 @@ public class CRoom {
 
         if (numRoom != cRoom.numRoom) return false;
         if (capacity != cRoom.capacity) return false;
-        if (numBatiment != null ? !numBatiment.equals(cRoom.numBatiment) : cRoom.numBatiment != null) return false;
+        if (batiment != null ? !batiment.equals(cRoom.batiment) : cRoom.batiment != null) return false;
         return !(typeOfRoom != null ? !typeOfRoom.equals(cRoom.typeOfRoom) : cRoom.typeOfRoom != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = numBatiment != null ? numBatiment.hashCode() : 0;
+        int result = batiment != null ? batiment.hashCode() : 0;
         result = 31 * result + numRoom;
         result = 31 * result + (typeOfRoom != null ? typeOfRoom.hashCode() : 0);
         result = 31 * result + capacity;

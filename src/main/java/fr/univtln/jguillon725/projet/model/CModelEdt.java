@@ -40,9 +40,7 @@ public class CModelEdt extends Observable implements Observer{
 
     public List<CCourse> getPlanningWeek(int numDay) throws PersistanceException {
         Calendar cal = Calendar.getInstance();
-        List<List<CCourse>> listCourseByWeek = new ArrayList<List<CCourse>>();
-        List<CCourse> listCourseByDay = null;
-
+        List<CCourse> listCourseByDay;
         this.week = cal.get(Calendar.WEEK_OF_YEAR);
         this.year = cal.get(Calendar.YEAR);
         this.month = cal.get(Calendar.MONTH);
@@ -50,10 +48,6 @@ public class CModelEdt extends Observable implements Observer{
         this.firtsDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         numDay = this.firtsDayOfWeek + numDay - 1;
         listCourseByDay = CEntityManagerCourse.findByDay(numDay);
-        //listCourseByWeek.add(listCourseByDay);
         return listCourseByDay;
-
-
-
     }
 }
