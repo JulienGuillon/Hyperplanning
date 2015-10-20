@@ -1,20 +1,30 @@
 package fr.univtln.jguillon725.projet.ihm;
 
-import fr.univtln.jguillon725.projet.model.ModelProfile;
+import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.CModelEdt;
 
 
 /**
  * Created by scaltot904 on 20/10/15.
  */
 public class CControlerProfile {
-    private ViewProfile viewProfile;
-    private ModelProfile modelProfile;
+    private IView viewProfile;
+    private CModelProfile CModelProfile;
 
-    public CControlerProfile (ViewProfile viewProfile, ModelProfile modelProfile) {
-        this.viewProfile = viewProfile;
-        this.modelProfile = modelProfile;
+    public CControlerProfile (CViewProfile CViewProfile, CModelProfile CModelProfile) {
+        this.viewProfile = CViewProfile;
+        this.CModelProfile = CModelProfile;
     }
 
-
+    public void retour(){
+        this.viewProfile.setVisible(false);
+        CModelEdt cModelEdt = new CModelEdt();
+        try {
+            viewProfile = new CViewEdt(cModelEdt);
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
+        this.viewProfile.setVisible(true);
+    }
 
 }

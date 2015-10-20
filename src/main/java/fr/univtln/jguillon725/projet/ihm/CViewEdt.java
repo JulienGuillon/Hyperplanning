@@ -47,41 +47,10 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
-        /** int i = 0;
-         for(String s: listDay)
-         {
-         labelDay[i] = new JLabel(listDay[i]);
-         c.gridx = i;
-         c.gridy = 0;
-         c.insets = new Insets(10,10,10,10);
-         panelDay.add(labelDay[i], c);
-         i++;
-         }
-
-         for(int j=8; j<19; j++)
-         {
-         labelHour[j-8] = new JLabel(Integer.toString(j));
-         c.gridx = 0;
-         c.gridy = j-8;
-         panelHour.add(labelHour[j-8], c);
-         }
-         **/
         this.connectionJLabel.setText(connectionJLabel.getText() + " sous le nom " + modelEdt.getPerson().getNom());
         c.gridx = 0;
         c.gridy = 0;
         panelInformation.add(this.connectionJLabel, c);
-/**
- c.gridwidth = 7;
- panelEdt.setPreferredSize(new Dimension(100, 100));
- panelEdt.add(panelDay, c);
-
- c.fill = GridBagConstraints.VERTICAL;
- c.gridy = 1;
-
- panelHour.setBackground(Color.red);
- c.anchor = GridBagConstraints.WEST;
- getContentPane().add(panelHour, BorderLayout.WEST);
- */
 
         for (int j = 0; j < 7; j++) {
             JPanel panel = new JPanel(new GridLayout(20, 1));
@@ -96,18 +65,12 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
             panelPlanning.add(panel);
         }
 
-        for (int j = 8; j < 28; j++) {
-
-        }
-
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 1;
         c.gridx = 1;
         panelEdt.add(panelPlanning, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-
-        //controleurEdt.getPlanningWeek(panelPlanning);
 
         getContentPane().add(panelInformation, BorderLayout.NORTH);
         c.gridx = 0;

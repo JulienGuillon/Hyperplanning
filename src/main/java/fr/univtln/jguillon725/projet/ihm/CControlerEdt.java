@@ -3,7 +3,6 @@ package fr.univtln.jguillon725.projet.ihm;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
-import fr.univtln.jguillon725.projet.model.ModelProfile;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 
 import java.util.List;
@@ -34,8 +33,8 @@ public class CControlerEdt {
 
     public void getProfile (){
         this.viewEdt.setVisible(false);
-        ModelProfile modelProfile = ModelProfile.getInstance();
-        viewEdt = new ViewProfile(modelProfile);
+        CModelProfile cModelProfile = CModelProfile.getInstance();
+        viewEdt = new CViewProfile(cModelProfile);
         this.viewEdt.setVisible(true);
     }
 }

@@ -1,23 +1,21 @@
-package fr.univtln.jguillon725.projet.model;
+package fr.univtln.jguillon725.projet.ihm;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.model.entities.CPerson;
+import fr.univtln.jguillon725.projet.model.CEntityManagerPerson;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Logger;
 
 /**
  * Created by scaltot904 on 20/10/15.
  */
-public class ModelProfile extends Observable implements Observer{
-    private static final ModelProfile MODEL_PROFILE = new ModelProfile();
+public class CModelProfile extends Observable implements Observer{
+    private static final CModelProfile MODEL_PROFILE = new CModelProfile();
 
-    private ModelProfile(){}
+    private CModelProfile(){}
 
-    public static ModelProfile getInstance()
+    public static CModelProfile getInstance()
     {
         return MODEL_PROFILE;
     }
