@@ -1,5 +1,7 @@
 package fr.univtln.jguillon725.projet.ihm;
 
+import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 
 /**
@@ -7,10 +9,24 @@ import fr.univtln.jguillon725.projet.model.CModelNotification;
  */
 public class CControlerNotification {
     private IView viewNotification;
-    private CModelNotification modelNotification;
+    private CModelNotification CModelNotification;
 
-    public CControlerNotification(CViewNotification viewNotification, CModelNotification modelNotification)
+    public CControlerNotification(CViewNotification CViewNotification, CModelNotification CModelNotification)
     {
-
+        this.viewNotification = CViewNotification;
+        this.CModelNotification = CModelNotification;
     }
+
+
+    public void retour(){
+        this.viewNotification.setVisible(false);
+        CModelEdt cModelEdt = new CModelEdt();
+        try {
+            viewNotification = new CViewEdt(cModelEdt);
+        } catch (PersistanceException e) {
+            e.printStackTrace();
+        }
+        this.viewNotification.setVisible(true);
+    }
+
 }

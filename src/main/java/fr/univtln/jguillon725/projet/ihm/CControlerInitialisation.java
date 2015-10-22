@@ -27,4 +27,6 @@ public class CControlerInitialisation {
         vueInitialisation = new CViewLogin(modelLogin);
         this.vueInitialisation.setVisible(true);
     }
+
+
 }

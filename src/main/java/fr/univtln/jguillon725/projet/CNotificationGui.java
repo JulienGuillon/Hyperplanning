@@ -6,26 +6,28 @@ import fr.univtln.jguillon725.projet.ihm.IView;
 import javax.swing.*;
 
 /**
- * Created by scaltot904 on 20/10/15.
+ * Created by scaltot904 on 22/10/15.
  */
-public class CProfileGui extends JFrame implements IView {
+public class CNotificationGui extends JFrame implements IView {
 
 
-    private JPanel panelProfile;
+    private JPanel panelNotification;
     private JButton retourButton;
 
-    public CProfileGui()
+
+    public CNotificationGui()
     {
-        super("Profil utilisateur");
+        super("Centre de notifications");
         setSize(800, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setContentPane(panelProfile);
+        setContentPane(panelNotification);
 
         this.setVisible(true);
     }
 
     @Override
     public void createView(Object iModel) throws PersistanceException {
-        new CProfileGui();
+        new CNotificationGui();
     }
+
 }

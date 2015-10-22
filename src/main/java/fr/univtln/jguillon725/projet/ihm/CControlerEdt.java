@@ -1,11 +1,13 @@
 package fr.univtln.jguillon725.projet.ihm;
 
+import fr.univtln.jguillon725.projet.CNotificationGui;
 import fr.univtln.jguillon725.projet.CProfileGui;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 
+import java.awt.color.CMMException;
 import java.util.List;
 
 /**
@@ -27,8 +29,8 @@ public class CControlerEdt {
     public void notification()
     {
         this.viewEdt.setVisible(false);
-        CModelNotification modelNotification = new CModelNotification();
-        viewEdt = new CViewNotification(modelNotification);
+        CModelNotification cModelNotification = CModelNotification.getInstance();
+        viewEdt = new CNotificationGui();
         this.viewEdt.setVisible(true);
     }
 
