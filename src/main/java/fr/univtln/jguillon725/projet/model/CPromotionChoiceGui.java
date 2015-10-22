@@ -24,7 +24,8 @@ public class CPromotionChoiceGui extends JFrame implements IView{
         setSize(800, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(panelPromotionChoice);
-        validerButton.setSize(20, 50);
+        comboBox1.setSize(20, 50);
+
         this.setVisible(true);
     }
 }

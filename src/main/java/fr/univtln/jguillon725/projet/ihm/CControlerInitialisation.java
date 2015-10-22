@@ -3,6 +3,8 @@ package fr.univtln.jguillon725.projet.ihm;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelLogin;
+import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
+import fr.univtln.jguillon725.projet.model.CPromotionChoiceGui;
 
 /**
  * Created by julien on 20/10/15.
@@ -16,8 +18,8 @@ public class CControlerInitialisation {
 
     public void connexion() throws PersistanceException {
         this.vueInitialisation.setVisible(false);
-        CModelEdt modelEdt = new CModelEdt();
-        vueInitialisation = new CViewEdt(modelEdt);
+        CModelPromotionChoice cModelPromotionChoice = CModelPromotionChoice.getInstance();
+        vueInitialisation = new CPromotionChoiceGui();
         this.vueInitialisation.setVisible(true);
     }
 
