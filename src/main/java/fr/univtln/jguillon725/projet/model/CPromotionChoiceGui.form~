@@ -18,11 +18,17 @@
       </component>
       <component id="253fd" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
         <constraints>
+<<<<<<< HEAD
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+=======
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="336" height="28"/>
           </grid>
+>>>>>>> baf3130107c102884d90dbcdb7ee97f611b4b70e
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+        </properties>
       </component>
       <vspacer id="906ed">
         <constraints>

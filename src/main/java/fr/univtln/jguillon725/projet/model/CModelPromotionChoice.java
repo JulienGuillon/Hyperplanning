@@ -1,5 +1,9 @@
 package fr.univtln.jguillon725.projet.model;
 
+import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.entities.CPromotion;
+
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,6 +24,10 @@ public class CModelPromotionChoice extends Observable implements Observer {
     public void update(Observable o, Object arg) {
         setChanged();
         notifyObservers();
+    }
+
+    public List<CPromotion> getAllPromotion() throws PersistanceException {
+        return CEntityManagerPromotion.findAll();
     }
 
 }

@@ -19,7 +19,7 @@ public class CControlerInitialisation {
     public void connexion() throws PersistanceException {
         this.vueInitialisation.setVisible(false);
         CModelPromotionChoice cModelPromotionChoice = CModelPromotionChoice.getInstance();
-        vueInitialisation = new CPromotionChoiceGui();
+        vueInitialisation = new CPromotionChoiceGui(cModelPromotionChoice);
         this.vueInitialisation.setVisible(true);
     }
 

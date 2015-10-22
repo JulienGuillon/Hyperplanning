@@ -50,11 +50,11 @@ public class CEntityManagerPromotion implements IEntity {
 
     }
 
-    public CPromotion createFromResultSet(ResultSet pResult) throws SQLException {
+    public static CPromotion createFromResultSet(ResultSet pResult) throws SQLException {
         return new CPromotion(pResult.getString("typePromotion"), pResult.getString("domainePromotion"), pResult.getInt("anneepromotion"), pResult.getInt("nombreInscrit"));
     }
 
-    public List<CPromotion> findAll() throws PersistanceException {
+    public static List<CPromotion> findAll() throws PersistanceException {
         List<CPromotion> promotions = new ArrayList<CPromotion>();
         try {
             ResultSet result = findAllPromotion.executeQuery();
