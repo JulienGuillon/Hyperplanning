@@ -9,12 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by julien on 13/10/15.
+ * Created by julien on 23/10/15.
  */
-public class CViewLogin extends JFrame implements IView<CModelLogin>{
-
+public class CLoginGui extends JPanel implements IView<CModelLogin> {
     private final CModelLogin modeleLogin;
-    private final CControleurLogin controleurLogin = null;
+    private final CControleurLogin controleurLogin;
 
     private final JPanel loginPanel = new JPanel(new GridBagLayout());
     private final JPanel reinitialiserPanel = new JPanel(new GridBagLayout());
@@ -27,20 +26,17 @@ public class CViewLogin extends JFrame implements IView<CModelLogin>{
     private final JLabel loginJLabel = new JLabel("Login");
     private final JLabel passwordJLabel = new JLabel("Password");
 
-    public CViewLogin(){
+    public CLoginGui(){
         loginJTextField = null;
         passwordJTextField = null;
-       // controleurLogin = null;
+        controleurLogin = null;
         modeleLogin = null;
     }
 
-    public CViewLogin(CModelLogin modeleLogin)
+    public CLoginGui(CModelLogin modeleLogin)
     {
-        super("Authentification");
-        setSize(800, 600);
-
         this.modeleLogin = modeleLogin;
-        //this.controleurLogin = new CControleurLogin(this, modeleLogin);
+        this.controleurLogin = new CControleurLogin(this, modeleLogin);
 
         connexionJButton.setEnabled(false);
         connexionJButton.addActionListener(new ActionListener() {
@@ -53,8 +49,6 @@ public class CViewLogin extends JFrame implements IView<CModelLogin>{
         //Les modèles des champs textes sont dans le contrôleur
         loginJTextField = new JTextField(controleurLogin.getLoginModel(), "", 10);
         passwordJTextField = new JPasswordField(controleurLogin.getPasswordModel(), "", 10);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -84,9 +78,7 @@ public class CViewLogin extends JFrame implements IView<CModelLogin>{
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        getContentPane().add(loginPanel, BorderLayout.CENTER);
-
-        setVisible(true);
+        add(loginPanel, BorderLayout.CENTER);
     }
 
     public void setConnexionOk(boolean connexionOk) {

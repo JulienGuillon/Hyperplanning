@@ -1,6 +1,7 @@
 package fr.univtln.jguillon725.projet.controler;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.gui.CLoginGui;
 import fr.univtln.jguillon725.projet.gui.CViewEdt;
 import fr.univtln.jguillon725.projet.gui.CViewLogin;
 import fr.univtln.jguillon725.projet.gui.IView;
@@ -24,7 +25,7 @@ public class CControleurLogin {
     private Document loginModel = new PlainDocument();
     private Document passwordModel = new PlainDocument();
 
-    public CControleurLogin(final CViewLogin viewLogin, CModelLogin modeleLogin) {
+    public CControleurLogin(final CLoginGui viewLogin, CModelLogin modeleLogin) {
         this.viewLogin = viewLogin;
         this.modeleLogin = modeleLogin;
 

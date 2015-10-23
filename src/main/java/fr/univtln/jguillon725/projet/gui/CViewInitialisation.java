@@ -71,5 +71,7 @@ public class CViewInitialisation extends JFrame implements IView<CModelInitialis
         setVisible(true);
     }
 
-
+    public JPanel getPanelChoice() {
+        return panelChoice;
+    }
 }

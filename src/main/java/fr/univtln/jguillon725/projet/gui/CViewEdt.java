@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by julien on 15/10/15.
  */
-public class CViewitEdt extends JFrame implements IView<CModelEdt> {
+public class CViewEdt extends JFrame implements IView<CModelEdt> {
     private final CModelEdt modelEdt;
     private final CControlerEdt controleurEdt;
 
@@ -131,7 +131,7 @@ public class CViewitEdt extends JFrame implements IView<CModelEdt> {
         listPlanning.get(0).get(2).setOpaque(true);
         listPlanning.get(0).get(3).setOpaque(true);
         tabbedPane.addTab("Semaine", panelEdt);
-        JPanel panelTest = new JPanel();
+        JPanel panelTest = new CLoginGui();
         tabbedPane.addTab("Profil", panelTest);
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
         setVisible(true);

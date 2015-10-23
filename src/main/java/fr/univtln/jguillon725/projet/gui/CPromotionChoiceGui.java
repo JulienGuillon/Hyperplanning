@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by julien on 22/10/15.
  */
-public class CPromotionChoiceGui extends JFrame implements IView {
+public class CPromotionChoiceGui extends JPanel implements IView {
     private final CModelPromotionChoice cModelPromotionChoice;
     private final CControlerPromotionChoice cControlerPromotionChoice;
     private List<CPromotion> promotions;
@@ -34,10 +34,7 @@ public class CPromotionChoiceGui extends JFrame implements IView {
     }
 
     public CPromotionChoiceGui(CModelPromotionChoice cModelPromotionChoice) throws PersistanceException {
-        super("Choix promotion");
-        setSize(800, 600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setContentPane(panelPromotionChoice);
+
         comboBox1.setSize(20, 50);
 
         this.cModelPromotionChoice = cModelPromotionChoice;
@@ -62,7 +59,6 @@ public class CPromotionChoiceGui extends JFrame implements IView {
                 }
             }
         });
-        this.setVisible(true);
     }
 
     public void afficherPromotion() {
