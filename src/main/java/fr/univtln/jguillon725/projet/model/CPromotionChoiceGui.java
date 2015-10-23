@@ -7,6 +7,8 @@ import fr.univtln.jguillon725.projet.ihm.IView;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 /**
@@ -43,6 +45,23 @@ public class CPromotionChoiceGui extends JFrame implements IView {
 
         promotions = cControlerPromotionChoice.getAllPromotion();
         afficherPromotion();
+        comboBox1.setEditable(true);
+        comboBox1.setMaximumRowCount(10);
+
+
+        comboBox1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                switch (e.getStateChange()) {
+                    case ItemEvent.DESELECTED:
+                        System.out.println(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
+                        break;
+                    case ItemEvent.SELECTED:
+                        System.out.println(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
+                        break;
+                }
+            }
+        });
         this.setVisible(true);
     }
 

@@ -1,5 +1,6 @@
 package fr.univtln.jguillon725.projet.ihm;
 
+import fr.univtln.jguillon725.projet.CNotificationGui;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
@@ -11,9 +12,9 @@ public class CControlerNotification {
     private IView viewNotification;
     private CModelNotification CModelNotification;
 
-    public CControlerNotification(CViewNotification CViewNotification, CModelNotification CModelNotification)
+    public CControlerNotification(CNotificationGui cNotificationGui, CModelNotification CModelNotification)
     {
-        this.viewNotification = CViewNotification;
+        this.viewNotification = cNotificationGui;
         this.CModelNotification = CModelNotification;
     }
 

@@ -30,7 +30,7 @@ public class CControlerEdt {
     {
         this.viewEdt.setVisible(false);
         CModelNotification cModelNotification = CModelNotification.getInstance();
-        viewEdt = new CNotificationGui();
+        viewEdt = new CNotificationGui(cModelNotification);
         this.viewEdt.setVisible(true);
     }
 

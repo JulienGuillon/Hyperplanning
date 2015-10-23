@@ -134,4 +134,9 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         setVisible(true);
     }
 
+    public JPanel getPanelEdt() {
+        return panelEdt;
+    }
+
+    
 }

@@ -24,7 +24,7 @@ public class CEntityManagerPromotion implements IEntity {
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
-            findAllPromotion = connection.prepareStatement("select * from PROMOTION");
+            findAllPromotion = connection.prepareStatement("select * from PROMOTION ORDER BY TYPEPROMOTION, DOMAINEPROMOTION");
         } catch (SQLException e) {
             e.printStackTrace();
         }

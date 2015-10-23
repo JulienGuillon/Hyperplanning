@@ -6,6 +6,10 @@ import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
 import fr.univtln.jguillon725.projet.model.CPromotionChoiceGui;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +20,16 @@ public class CControlerPromotionChoice {
     private IView cPromotionChoiceGui;
     private CModelPromotionChoice cModelPromotionChoice;
 
-    public CControlerPromotionChoice (CPromotionChoiceGui cPromotionChoiceGui, CModelPromotionChoice cModelPromotionChoice) {
+    private Document choicePromotion = new PlainDocument();
+
+    public CControlerPromotionChoice (final CPromotionChoiceGui cPromotionChoiceGui, final CModelPromotionChoice cModelPromotionChoice) {
         this.cPromotionChoiceGui = cPromotionChoiceGui;
         this.cModelPromotionChoice = cModelPromotionChoice;
+    }
+
+    public Document getChoicePromotion()
+    {
+        return choicePromotion;
     }
 
     public List<CPromotion> getAllPromotion() throws PersistanceException {

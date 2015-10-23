@@ -116,6 +116,7 @@ public class Password {
         System.out.println("Verify against computed hash: " + compare_computed);
 
         System.out.println(hashPassword("jguillon725"));
+        System.out.println(hashPassword("scaltot904"));
 
     }
 
