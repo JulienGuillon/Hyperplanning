@@ -3,11 +3,14 @@ package fr.univtln.jguillon725.projet.gui;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by scaltot904 on 20/10/15.
  */
-public class CProfileGui extends JFrame implements IView {
+public class CProfileGui extends JPanel implements IView {
 
 
     private JPanel panelProfile;
@@ -15,12 +18,15 @@ public class CProfileGui extends JFrame implements IView {
 
     public CProfileGui()
     {
-        super("Profil utilisateur");
-        setSize(800, 600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setContentPane(panelProfile);
+        add(panelProfile);
+        retourButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("retour");
+            }
+        });
 
-        this.setVisible(true);
+
     }
 
     @Override

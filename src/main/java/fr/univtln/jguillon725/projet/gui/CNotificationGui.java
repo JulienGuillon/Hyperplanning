@@ -5,13 +5,14 @@ import fr.univtln.jguillon725.projet.controler.CControlerNotification;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  * Created by scaltot904 on 22/10/15.
  */
-public class CNotificationGui extends JFrame implements IView<CModelNotification> {
+public class CNotificationGui extends JPanel implements IView<CModelNotification> {
 
     private JPanel panelNotification;
     private JButton retourButton;
@@ -20,17 +21,18 @@ public class CNotificationGui extends JFrame implements IView<CModelNotification
 
     public CNotificationGui(CModelNotification cModelNotification)
     {
-        super("Centre de notifications");
         this.cModelNotification = cModelNotification;
         this.cControlerNotification = new CControlerNotification(this, cModelNotification);
-        setSize(800, 600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setContentPane(panelNotification);
-
+        add(panelNotification);
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cControlerNotification.retour();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        cControlerNotification.retour();
+                    }
+                });
             }
         });
 

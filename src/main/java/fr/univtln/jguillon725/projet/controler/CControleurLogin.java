@@ -69,9 +69,9 @@ public class CControleurLogin {
                     passwordModel.getText(0, passwordModel.getLength())
             );
             this.viewLogin.setVisible(false);
+            viewLogin.getTopLevelAncestor().setVisible(false);
             CModelEdt modelEdt = new CModelEdt(person);
             CViewEdt viewEdt = new CViewEdt(modelEdt);
-            //this.viewLogin.setVisible(true);
 
         } catch (BadLocationException e) {
             e.printStackTrace();

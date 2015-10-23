@@ -1,15 +1,14 @@
 package fr.univtln.jguillon725.projet.controler;
 
-import fr.univtln.jguillon725.projet.gui.CNotificationGui;
-import fr.univtln.jguillon725.projet.gui.CProfileGui;
+import fr.univtln.jguillon725.projet.gui.*;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.CModelLogin;
 import fr.univtln.jguillon725.projet.model.CModelProfile;
-import fr.univtln.jguillon725.projet.gui.CViewEdt;
-import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -30,14 +29,16 @@ public class CControlerEdt {
 
     public void notification()
     {
-        this.viewEdt.setVisible(false);
-        CModelNotification cModelNotification = CModelNotification.getInstance();
-        //viewEdt = new CNotificationGui(cModelNotification);
-        this.viewEdt.setVisible(true);
+        CModelNotification modelNotification = CModelNotification.getInstance();
+        viewEdt.remove(viewEdt.getPanelEdt());
+        viewEdt.add(new CNotificationGui(modelNotification), BorderLayout.CENTER);
+        viewEdt.revalidate();
     }
 
     public void getProfile (){
-        int index = viewEdt.getTabbedPane().indexOfTab("Profil");
-        viewEdt.getTabbedPane().setSelectedIndex(index);
+        CModelProfile modelProfile = CModelProfile.getInstance();
+        viewEdt.remove(viewEdt.getPanelEdt());
+        viewEdt.add(new CProfileGui(), BorderLayout.CENTER);
+        viewEdt.revalidate();
     }
 }

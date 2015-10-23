@@ -114,7 +114,12 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         buttonNotification.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleurEdt.notification();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        controleurEdt.notification();
+                    }
+                });
             }
         });
         panelChoice.add(buttonNotification);
@@ -131,8 +136,8 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         listPlanning.get(0).get(2).setOpaque(true);
         listPlanning.get(0).get(3).setOpaque(true);
         tabbedPane.addTab("Semaine", panelEdt);
-        JPanel panelTest = new CLoginGui();
-        tabbedPane.addTab("Profil", panelTest);
+        tabbedPane.addTab("Jour", new JPanel());
+
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
         setVisible(true);
     }
