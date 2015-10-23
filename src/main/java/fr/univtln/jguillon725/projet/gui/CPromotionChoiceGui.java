@@ -1,9 +1,9 @@
-package fr.univtln.jguillon725.projet.model;
+package fr.univtln.jguillon725.projet.gui;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.ihm.CControlerProfile;
-import fr.univtln.jguillon725.projet.ihm.CControlerPromotionChoice;
-import fr.univtln.jguillon725.projet.ihm.IView;
+import fr.univtln.jguillon725.projet.controler.CControlerPromotionChoice;
+import fr.univtln.jguillon725.projet.gui.IView;
+import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package fr.univtln.jguillon725.projet.model;
+package fr.univtln.jguillon725.projet.gui;
 
 import javax.swing.*;
 

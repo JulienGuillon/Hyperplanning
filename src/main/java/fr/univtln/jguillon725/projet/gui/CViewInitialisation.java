@@ -1,5 +1,6 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.gui;
 
+import fr.univtln.jguillon725.projet.controler.CControlerInitialisation;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelInitialisation;
 

@@ -1,10 +1,11 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.controler;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.model.CModelEdt;
+import fr.univtln.jguillon725.projet.gui.CViewLogin;
+import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelLogin;
 import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
-import fr.univtln.jguillon725.projet.model.CPromotionChoiceGui;
+import fr.univtln.jguillon725.projet.gui.CPromotionChoiceGui;
 
 /**
  * Created by julien on 20/10/15.

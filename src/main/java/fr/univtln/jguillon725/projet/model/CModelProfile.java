@@ -1,7 +1,6 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.model;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.model.CEntityManagerPerson;
 
 import java.util.List;
 import java.util.Observable;

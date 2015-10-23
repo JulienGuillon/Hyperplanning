@@ -1,16 +1,13 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.controler;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.model.CModelEdt;
+import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
-import fr.univtln.jguillon725.projet.model.CPromotionChoiceGui;
+import fr.univtln.jguillon725.projet.gui.CPromotionChoiceGui;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

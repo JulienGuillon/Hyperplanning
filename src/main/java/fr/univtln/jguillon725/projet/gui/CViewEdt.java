@@ -1,11 +1,10 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.gui;
 
+import fr.univtln.jguillon725.projet.controler.CControlerEdt;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
-import fr.univtln.jguillon725.projet.model.entities.CRoom;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * Created by julien on 15/10/15.
  */
-public class CViewEdt extends JFrame implements IView<CModelEdt> {
+public class CViewitEdt extends JFrame implements IView<CModelEdt> {
     private final CModelEdt modelEdt;
     private final CControlerEdt controleurEdt;
 
@@ -24,6 +23,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
     private final JPanel panelPlanning = new JPanel(new GridLayout(1, 6));
     private final JPanel panelChoice = new JPanel(new GridLayout(1,5));
     private final JButton buttonNotification = new JButton("Notification");
+    private final JTabbedPane tabbedPane = new JTabbedPane();
 
     private final String[] listDay = {"Heure", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
     private final String[] listHour= {"8h00", "8h30", "9h00", "9h30", "10h00", "10h30", "11h00", "11h30", "12h00", "12h30",
@@ -109,7 +109,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         panelChoice.add(jButton);
 
         getContentPane().add(panelChoice, BorderLayout.SOUTH);
-        getContentPane().add(panelEdt, BorderLayout.CENTER);
+       // getContentPane().add(panelEdt, BorderLayout.CENTER);
 
         buttonNotification.addActionListener(new ActionListener() {
             @Override
@@ -130,13 +130,19 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         listPlanning.get(0).get(1).setOpaque(true);
         listPlanning.get(0).get(2).setOpaque(true);
         listPlanning.get(0).get(3).setOpaque(true);
-
+        tabbedPane.addTab("Semaine", panelEdt);
+        JPanel panelTest = new JPanel();
+        tabbedPane.addTab("Profil", panelTest);
+        getContentPane().add(tabbedPane, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
     }
 
     public JPanel getPanelEdt() {
         return panelEdt;
     }
-
-    
 }
+

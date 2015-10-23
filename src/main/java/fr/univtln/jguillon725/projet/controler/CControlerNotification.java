@@ -1,7 +1,9 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.controler;
 
-import fr.univtln.jguillon725.projet.CNotificationGui;
+import fr.univtln.jguillon725.projet.gui.CNotificationGui;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.gui.CViewEdt;
+import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 

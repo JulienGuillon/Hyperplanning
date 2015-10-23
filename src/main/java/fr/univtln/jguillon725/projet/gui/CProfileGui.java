@@ -1,7 +1,6 @@
-package fr.univtln.jguillon725.projet;
+package fr.univtln.jguillon725.projet.gui;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.ihm.IView;
 
 import javax.swing.*;
 

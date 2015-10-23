@@ -1,5 +1,6 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.gui;
 
+import fr.univtln.jguillon725.projet.controler.CControleurLogin;
 import fr.univtln.jguillon725.projet.model.CModelLogin;
 
 import javax.swing.*;

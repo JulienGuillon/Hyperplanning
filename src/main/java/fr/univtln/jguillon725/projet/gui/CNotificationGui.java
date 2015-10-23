@@ -1,9 +1,7 @@
-package fr.univtln.jguillon725.projet;
+package fr.univtln.jguillon725.projet.gui;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
-import fr.univtln.jguillon725.projet.ihm.CControlerNotification;
-import fr.univtln.jguillon725.projet.ihm.CControlerProfile;
-import fr.univtln.jguillon725.projet.ihm.IView;
+import fr.univtln.jguillon725.projet.controler.CControlerNotification;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 
 import javax.swing.*;

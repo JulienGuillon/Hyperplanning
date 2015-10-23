@@ -1,6 +1,8 @@
-package fr.univtln.jguillon725.projet.ihm;
+package fr.univtln.jguillon725.projet.gui;
 
+import fr.univtln.jguillon725.projet.controler.CControlerProfile;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.CModelProfile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by scaltot904 on 20/10/15.
  */
-public class CViewProfile extends JFrame implements IView <CModelProfile>{
+public class CViewProfile extends JFrame implements IView <fr.univtln.jguillon725.projet.model.CModelProfile>{
     private final CModelProfile CModelProfile;
     private final CControlerProfile cControlerProfile;
 
