@@ -3,7 +3,6 @@ package fr.univtln.jguillon725.projet.controler;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.gui.CLoginGui;
 import fr.univtln.jguillon725.projet.gui.CViewEdt;
-import fr.univtln.jguillon725.projet.gui.CViewLogin;
 import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelLogin;
@@ -19,7 +18,7 @@ import javax.swing.text.PlainDocument;
  * Created by julien on 13/10/15.
  */
 public class CControleurLogin {
-    private IView viewLogin;
+    private CLoginGui viewLogin;
     private CModelLogin modeleLogin;
 
     private Document loginModel = new PlainDocument();
@@ -71,8 +70,8 @@ public class CControleurLogin {
             );
             this.viewLogin.setVisible(false);
             CModelEdt modelEdt = new CModelEdt(person);
-            viewLogin = new CViewEdt(modelEdt);
-            this.viewLogin.setVisible(true);
+            CViewEdt viewEdt = new CViewEdt(modelEdt);
+            //this.viewLogin.setVisible(true);
 
         } catch (BadLocationException e) {
             e.printStackTrace();

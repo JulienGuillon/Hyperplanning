@@ -87,7 +87,7 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
 
     @Override
     public void createView(CModelLogin iModel) {
-        new CViewLogin(iModel);
+        new CLoginGui(iModel);
 
     }
 }
