@@ -8,7 +8,9 @@ import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelNotification;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +25,17 @@ public class CControlerEdt {
         this.modelEdt = modelEdt;
     }
 
-    public List<CCourse> getPlanningWeek(int numDay) throws PersistanceException {
-        return this.modelEdt.getPlanningWeek(numDay);
+    public List<CCourse> getPlanningDay(int numDay) throws PersistanceException {
+        return this.modelEdt.getPerson().findCourse(numDay);
+    }
+
+    public void getPlanningWeek() throws PersistanceException {
+        List<List<CCourse>> listPlanning = new ArrayList<List<CCourse>>();
+        for(int i=1; i<7; i++)
+        {
+            listPlanning.add(getPlanningDay(i));
+        }
+        viewEdt.updatePlanning(listPlanning);
     }
 
     public void notification()
@@ -36,7 +47,7 @@ public class CControlerEdt {
     }
 
     public void getProfile (){
-        CModelProfile modelProfile = CModelProfile.getInstance();
+        //CModelProfile modelProfile = CModelProfile.getInstance();
         viewEdt.remove(viewEdt.getPanelEdt());
         viewEdt.add(new CProfileGui(), BorderLayout.CENTER);
         viewEdt.revalidate();

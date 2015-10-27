@@ -47,7 +47,8 @@ public class CModelEdt extends Observable implements Observer{
         cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         this.firtsDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         numDay = this.firtsDayOfWeek + numDay - 1;
-        listCourseByDay = CEntityManagerCourse.findByDay(numDay);
+        listCourseByDay = person.findCourse(numDay);
+        //listCourseByDay = CEntityManagerCourse.findByDay(numDay, person);
         return listCourseByDay;
     }
 }

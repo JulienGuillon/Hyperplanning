@@ -22,14 +22,15 @@ public class CControlerNotification {
 
 
     public void retour(){
-        this.viewNotification.setVisible(false);
-        CModelEdt cModelEdt = new CModelEdt();
-        try {
-            viewNotification = new CViewEdt(cModelEdt);
-        } catch (PersistanceException e) {
-            e.printStackTrace();
-        }
-        this.viewNotification.setVisible(true);
+       // this.viewNotification.setVisible(false);
+       // CModelEdt cModelEdt = new CModelEdt();
+       // try {
+        //    viewNotification = new CViewEdt(cModelEdt);
+        //} catch (PersistanceException e) {
+         //   e.printStackTrace();
+        //}
+        //this.viewNotification.setVisible(true);
+        System.out.println("hey");
     }
 
 }

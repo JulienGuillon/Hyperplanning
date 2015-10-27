@@ -3,6 +3,8 @@ package fr.univtln.jguillon725.projet.model;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.entities.CPerson;
 import fr.univtln.jguillon725.projet.model.entities.CStudent;
+import fr.univtln.jguillon725.projet.model.entities.EDomain;
+import fr.univtln.jguillon725.projet.model.entities.EInstitut;
 import fr.univtln.jguillon725.projet.utils.DatabaseManager;
 
 import java.sql.Connection;
@@ -15,10 +17,9 @@ import java.util.List;
 import static fr.univtln.jguillon725.projet.utils.Password.checkPassword;
 
 /**
- * Created by julien on 16/10/15.
+ * Created by julien on 26/10/15.
  */
-public class CEntityManagerPerson implements IEntity {
-
+public class CEntityManagerStudent implements IEntity {
     private static PreparedStatement findByLogin;
     private static PreparedStatement findStudentInfo;
     private static Connection connection;
@@ -27,7 +28,6 @@ public class CEntityManagerPerson implements IEntity {
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
-            findByLogin = connection.prepareStatement("select NOM, ROLE, LOGIN, PASSWORD from USERS where LOGIN=?");
             findStudentInfo = connection.prepareStatement("select DOMAINE, PROMOTION, INSTITUT from STUDENT where LOGIN=?");
 
         } catch (SQLException e) {
@@ -60,44 +60,13 @@ public class CEntityManagerPerson implements IEntity {
 
     }
 
-    public static CPerson find(String pLogin, String pPassword) throws PersistanceException {
-        try {
-            CPerson person = null;
-            String role;
-            //sinon on va le chercheur et on l'ajoute à la map
-            findByLogin.setString(1, pLogin);
-            ResultSet result = findByLogin.executeQuery();
-            if (result.next()) {
-                if ( checkPassword(pPassword, result.getString("PASSWORD"))) {
-                    person = createFromResultSet(result);
-                    role = person.getRole();
-                    System.out.println(role);
-                    switch (role)
-                    {
-                        case "STUDET":
-                            findStudentInfo.setString(1, pLogin);
-
-                            ResultSet resultStudent = findStudentInfo.executeQuery();
-                            if (resultStudent.next()) {
-                                CStudent student = new CStudent(person, resultStudent.getString("DOMAINE"), resultStudent.getInt("PROMOTION"), resultStudent.getString("INSTITUT"));
-                                System.out.println(student);
-                               // return student;
-                            }
-                            break;
-                        case "TEACHER":
-                            System.out.println("teacher");
-                            break;
-                    }
-
-                    return person;
-                }
-                return person;
-            }
-            else
-                throw new PersistanceException("CPerson " + pLogin + " introuvable.");
-        }
-        catch (SQLException e) {
-            throw new PersistanceException(e);
+    public static void findInfo(String pLogin, CStudent student) throws PersistanceException, SQLException {
+        findStudentInfo.setString(1, pLogin);
+        ResultSet resultStudent = findStudentInfo.executeQuery();
+        if (resultStudent.next()) {
+            student.setDomain(EDomain.valueOf(resultStudent.getString("DOMAINE")));
+            student.setPromotion(resultStudent.getInt("PROMOTION"));
+            student.setInstitut(EInstitut.valueOf(resultStudent.getString("INSTITUT")));
         }
     }
 

@@ -20,7 +20,7 @@ public class Creation {
     public static void main(String[] args) throws ConfigImportException, PersistanceException, SQLException, IOException {
         Read fileCreation = new Read();
         String creation;
-        creation = fileCreation.readFile("creation.sql");
+        creation = fileCreation.readFile("creation2.sql");
         System.out.println(creation);
         ConfigReader.importConfig();
         CEntityManager entityManager = CEntityManager.getInstance();

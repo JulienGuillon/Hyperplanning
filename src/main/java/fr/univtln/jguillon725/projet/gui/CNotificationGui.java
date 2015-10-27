@@ -16,6 +16,7 @@ public class CNotificationGui extends JPanel implements IView<CModelNotification
 
     private JPanel panelNotification;
     private JButton retourButton;
+    private JTextField textField1;
     private CModelNotification cModelNotification;
     private CControlerNotification cControlerNotification;
 
@@ -27,12 +28,13 @@ public class CNotificationGui extends JPanel implements IView<CModelNotification
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
+                Thread hilo = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         cControlerNotification.retour();
                     }
                 });
+                hilo.start();
             }
         });
 

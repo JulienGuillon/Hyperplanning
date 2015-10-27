@@ -4,6 +4,7 @@ import fr.univtln.jguillon725.projet.exceptions.ConfigImportException;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.gui.CViewAffichage;
+import fr.univtln.jguillon725.projet.model.CEntityManagerRoom;
 import fr.univtln.jguillon725.projet.utils.ConfigReader;
 
 /**

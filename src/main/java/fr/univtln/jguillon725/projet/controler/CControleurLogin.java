@@ -7,12 +7,15 @@ import fr.univtln.jguillon725.projet.gui.IView;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
 import fr.univtln.jguillon725.projet.model.CModelLogin;
 import fr.univtln.jguillon725.projet.model.entities.CPerson;
+import fr.univtln.jguillon725.projet.model.entities.CStudent;
+import fr.univtln.jguillon725.projet.model.entities.CTeacher;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
+import java.sql.SQLException;
 
 /**
  * Created by julien on 13/10/15.
@@ -62,7 +65,7 @@ public class CControleurLogin {
         return passwordModel;
     }
 
-    public void seConnecter() {
+    public void seConnecter() throws SQLException {
         try {
             CPerson person = modeleLogin.verifierIdentifiant(
                     loginModel.getText(0, loginModel.getLength()),
@@ -70,8 +73,16 @@ public class CControleurLogin {
             );
             this.viewLogin.setVisible(false);
             viewLogin.getTopLevelAncestor().setVisible(false);
-            CModelEdt modelEdt = new CModelEdt(person);
-            CViewEdt viewEdt = new CViewEdt(modelEdt);
+            String role = person.getRole();
+            switch (role){
+                case "STUDENT":
+                    person.setRoleP(new CStudent(person));
+                    break;
+                case "TEACHER":
+                    person.setRoleP(new CTeacher(person));
+                    break;
+            }
+            person.afficherPlanning();
 
         } catch (BadLocationException e) {
             e.printStackTrace();

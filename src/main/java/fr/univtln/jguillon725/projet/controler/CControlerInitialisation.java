@@ -27,8 +27,11 @@ public class CControlerInitialisation {
 
     public void identification() throws PersistanceException {
         CModelLogin modelLogin = CModelLogin.getInstance();
-        vueInitialisation.remove(vueInitialisation.getPanelChoice());
-        vueInitialisation.add(new CLoginGui(modelLogin), BorderLayout.CENTER);
+        vueInitialisation.getPanelChoice().removeAll();
+        vueInitialisation.repaint();
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        vueInitialisation.getPanelChoice().add(new CLoginGui(modelLogin), c);
         vueInitialisation.revalidate();
     }
 

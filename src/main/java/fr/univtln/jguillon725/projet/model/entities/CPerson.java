@@ -1,5 +1,10 @@
 package fr.univtln.jguillon725.projet.model.entities;
 
+import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  * Created by julien on 13/10/15.
  */
@@ -7,8 +12,13 @@ public class CPerson implements Comparable<CPerson>{
     private String nom;
     private String role;
     private String login;
+    private RolePerson roleP;
 
-    public CPerson(String nom, String role, String login) {
+    public CPerson() throws PersistanceException, SQLException {
+        roleP = new CStudent(this);
+    }
+
+    public CPerson(String nom, String role, String login) throws PersistanceException, SQLException {
         this.nom = nom;
         this.role = role;
         this.login = login;
@@ -38,6 +48,11 @@ public class CPerson implements Comparable<CPerson>{
         this.login = login;
     }
 
+    public void setRoleP(RolePerson roleP) {
+        System.out.println("h");
+        this.roleP = roleP;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,5 +79,13 @@ public class CPerson implements Comparable<CPerson>{
         return (this.nom.compareTo(o.getNom())
                 & this.role.compareTo(o.getRole())
                 & this.login.compareTo(o.getLogin()));
+    }
+
+    public List<CCourse> findCourse(int numDay) throws PersistanceException {
+        return roleP.findCourse(numDay);
+    };
+
+    public void afficherPlanning() throws PersistanceException {
+        roleP.afficherPlanning();
     }
 }

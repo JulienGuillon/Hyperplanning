@@ -54,10 +54,10 @@ public class CEntityManagerRoom implements IEntity {
 
     private static CRoom createFromResultSet(ResultSet pResult) throws SQLException
     {
-        return new CRoom(pResult.getString("batiment"),pResult.getInt("numRoom"), pResult.getString("typeOfRoom"), pResult.getInt("capacity"));
+        return new CRoom(pResult.getString("batiment"),pResult.getInt("numRoom"), pResult.getString("typeRoom"), pResult.getInt("capacity"));
     }
 
-    public List<CRoom> findAll() throws SQLException {
+    public static List<CRoom> findAll() throws SQLException {
         List<CRoom> listRoom = new ArrayList<CRoom>();
         ResultSet resultSet = findAll.executeQuery();
         while(resultSet.next())

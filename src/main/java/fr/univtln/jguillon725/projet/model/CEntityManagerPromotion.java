@@ -18,6 +18,7 @@ import java.util.List;
 public class CEntityManagerPromotion implements IEntity {
 
     private static PreparedStatement findAllPromotion;
+    private static PreparedStatement findByLibelle;
     private static Connection connection;
 
     //L'initialisation des preparedstatments.

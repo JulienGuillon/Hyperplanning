@@ -49,11 +49,17 @@ public class CViewInitialisation extends JFrame implements IView<CModelInitialis
         buttonUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    controlerInitialisation.identification();
-                } catch (PersistanceException e1) {
-                    e1.printStackTrace();
-                }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            controlerInitialisation.identification();
+                        } catch (PersistanceException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                });
             }
         });
 

@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created by julien on 23/10/15.
@@ -35,6 +36,7 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
 
     public CLoginGui(CModelLogin modeleLogin)
     {
+
         this.modeleLogin = modeleLogin;
         this.controleurLogin = new CControleurLogin(this, modeleLogin);
 
@@ -42,7 +44,17 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
         connexionJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controleurLogin.seConnecter();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            controleurLogin.seConnecter();
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                });
             }
         });
 
@@ -51,7 +63,6 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
         passwordJTextField = new JPasswordField(controleurLogin.getPasswordModel(), "", 10);
 
         GridBagConstraints c = new GridBagConstraints();
-
         //L'ajout d'un auteur
         loginPanel.setBorder(BorderFactory.createTitledBorder("Ajout"));
         c.gridx = 0;

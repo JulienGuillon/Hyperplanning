@@ -2,7 +2,9 @@ package fr.univtln.jguillon725.projet.gui;
 
 import fr.univtln.jguillon725.projet.controler.CControlerEdt;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
+import fr.univtln.jguillon725.projet.model.CEntityManagerCourse;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
+import fr.univtln.jguillon725.projet.model.entities.CCourse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,8 +126,10 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         });
         panelChoice.add(buttonNotification);
 
+        controleurEdt.getPlanningWeek();
+
         // TEST pour savoir comment modifier la couleur et ajouter des cours
-        listPlanning.get(0).get(0).setText("Math");
+       /** listPlanning.get(0).get(0).setText("Math");
         listPlanning.get(0).get(0).setBackground(Color.red);
         listPlanning.get(0).get(1).setBackground(Color.red);
         listPlanning.get(0).get(2).setBackground(Color.red);
@@ -135,10 +139,12 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         listPlanning.get(0).get(1).setOpaque(true);
         listPlanning.get(0).get(2).setOpaque(true);
         listPlanning.get(0).get(3).setOpaque(true);
+**/
         tabbedPane.addTab("Semaine", panelEdt);
         tabbedPane.addTab("Jour", new JPanel());
 
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
+//        System.out.println(modelEdt.getPlanningWeek(1));
         setVisible(true);
     }
 
@@ -148,6 +154,28 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
 
     public JPanel getPanelEdt() {
         return panelEdt;
+    }
+
+    public void updatePlanning(List<List<CCourse>> listCourse)
+    {
+        int i=0;
+        for(List<CCourse> courseDay: listCourse)
+        {
+            for(CCourse c: courseDay)
+            {
+                listPlanning.get(i).get((c.getHour() - 8) * 2).setText(c.getSubject());
+                System.out.println(c.getHour());
+                System.out.println(c.getDuree());
+
+                for(int j=(c.getHour()-8)*2; j<(c.getHour()-8)*2+c.getDuree()*2; j++)
+                {
+                    listPlanning.get(i).get(j).setBackground(Color.red);
+                    listPlanning.get(i).get(j).setOpaque(true);
+                }
+            }
+            i++;
+        }
+        revalidate();
     }
 }
 

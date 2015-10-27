@@ -2,6 +2,8 @@ package fr.univtln.jguillon725.projet.model;
 
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
+import fr.univtln.jguillon725.projet.model.entities.CStudent;
+import fr.univtln.jguillon725.projet.model.entities.CTeacher;
 import fr.univtln.jguillon725.projet.utils.DatabaseManager;
 
 import java.sql.Connection;
@@ -35,14 +37,22 @@ public class CEntityManagerCourse implements IEntity {
 
     }
 
-    private static PreparedStatement findByDay;
+    private static PreparedStatement findCourseStudentPromotion;
+    private static PreparedStatement findCourseStudentGroup;
+    private static PreparedStatement findCourseTeacherPromotion;
+    private static PreparedStatement findCourseTeacherGroup;
+
     private static Connection connection;
 
     //L'initialisation des preparedstatments.
     static {
         try {
             Connection connection = DatabaseManager.getConnection();
-            findByDay = connection.prepareStatement("select * from COURSE where DAY=?");
+            findCourseStudentPromotion = connection.prepareStatement("select * from viewcoursepromotion where DAY=? AND idpromotion=?");
+            findCourseStudentGroup = connection.prepareStatement("select * from viewcoursegroup where DAY=? AND idgroup=?");
+            findCourseTeacherPromotion = connection.prepareStatement("select * from viewcoursepromotion where DAY=? AND teacher=?");
+            findCourseTeacherGroup = connection.prepareStatement("select * from viewcoursegroup where DAY=? AND teacher=?");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,15 +65,49 @@ public class CEntityManagerCourse implements IEntity {
 
     }
 
-    public static List<CCourse> findByDay(int pNumDay) throws PersistanceException {
+    public static List<CCourse> findByDay(int pNumDay, CStudent person) throws PersistanceException {
         List<CCourse> courseByDay = new ArrayList<CCourse>();
         try {
-            findByDay.setInt(1, pNumDay);
-            ResultSet result = findByDay.executeQuery();
+            findCourseStudentPromotion.setInt(1, pNumDay);
+            findCourseStudentPromotion.setInt(2, person.getPromotion());
+
+            findCourseStudentGroup.setInt(1, pNumDay);
+            findCourseStudentGroup.setInt(2, 1);
+
+            ResultSet result = findCourseStudentPromotion.executeQuery();
             while (result.next()) {
                 CCourse course = createFromResultSet(result);
                     courseByDay.add(course);
                 }
+            result = findCourseStudentGroup.executeQuery();
+            while (result.next()) {
+                CCourse course = createFromResultSet(result);
+                courseByDay.add(course);
+            }
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return courseByDay;
+    }
+
+    public static List<CCourse> findByDay(int pNumDay, CTeacher person) throws PersistanceException {
+        List<CCourse> courseByDay = new ArrayList<CCourse>();
+        try {
+            findCourseTeacherPromotion.setInt(1, pNumDay);
+            findCourseTeacherPromotion.setString(2, person.getPerson().getLogin());
+            findCourseTeacherGroup.setInt(1, pNumDay);
+            findCourseTeacherGroup.setString(2, person.getPerson().getLogin());
+            ResultSet result = findCourseTeacherPromotion.executeQuery();
+            while (result.next()) {
+                CCourse course = createFromResultSet(result);
+                courseByDay.add(course);
+            }
+
+            result = findCourseTeacherGroup.executeQuery();
+            while (result.next()) {
+                CCourse course = createFromResultSet(result);
+                courseByDay.add(course);
+            }
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
