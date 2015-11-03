@@ -88,7 +88,7 @@ public class CEntityManagerPerson implements IEntity {
                             System.out.println("teacher");
                             break;
                     }
-
+                    DatabaseManager.releaseConnection(connection);
                     return person;
                 }
                 return person;

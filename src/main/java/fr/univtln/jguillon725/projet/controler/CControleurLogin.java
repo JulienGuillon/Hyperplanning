@@ -1,5 +1,6 @@
 package fr.univtln.jguillon725.projet.controler;
 
+import fr.univtln.jguillon725.projet.Ihm;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.gui.CLoginGui;
 import fr.univtln.jguillon725.projet.gui.CViewEdt;
@@ -71,18 +72,19 @@ public class CControleurLogin {
                     loginModel.getText(0, loginModel.getLength()),
                     passwordModel.getText(0, passwordModel.getLength())
             );
+            Ihm.person = person;
             this.viewLogin.setVisible(false);
             viewLogin.getTopLevelAncestor().setVisible(false);
             String role = person.getRole();
             switch (role){
                 case "STUDENT":
-                    person.setRoleP(new CStudent(person));
+                    Ihm.person.setRoleP(new CStudent(person));
                     break;
                 case "TEACHER":
-                    person.setRoleP(new CTeacher(person));
+                    Ihm.person.setRoleP(new CTeacher(person));
                     break;
             }
-            person.afficherPlanning();
+            Ihm.person.afficherPlanning();
 
         } catch (BadLocationException e) {
             e.printStackTrace();

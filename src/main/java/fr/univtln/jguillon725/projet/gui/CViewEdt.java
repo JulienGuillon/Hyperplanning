@@ -1,10 +1,13 @@
 package fr.univtln.jguillon725.projet.gui;
 
 import fr.univtln.jguillon725.projet.controler.CControlerEdt;
+import fr.univtln.jguillon725.projet.controler.CControlerPlanningWeek;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.CEntityManagerCourse;
 import fr.univtln.jguillon725.projet.model.CModelEdt;
+import fr.univtln.jguillon725.projet.model.CModelPlanningWeek;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
+import fr.univtln.jguillon725.projet.utils.CColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +22,13 @@ import java.util.List;
 public class CViewEdt extends JFrame implements IView<CModelEdt> {
     private final CModelEdt modelEdt;
     private final CControlerEdt controleurEdt;
+    private final CControlerPlanningWeek controlerPlanningWeek;
 
     private final JPanel panelInformation = new JPanel(new GridBagLayout());
-    private final JPanel panelEdt = new JPanel(new GridBagLayout());
+    private final CPlanningWeekGui panelPlanningWeek = new CPlanningWeekGui(new CModelEdt());
+    private final CReservationGui panelReservation;
+
+    private final JPanel panelPlanningDay = new JPanel(new GridLayout(1, 2));
     private final JPanel panelPlanning = new JPanel(new GridLayout(1, 6));
     private final JPanel panelChoice = new JPanel(new GridLayout(1,5));
     private final JButton buttonNotification = new JButton("Notification");
@@ -35,6 +42,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
 
     private final List<List<JLabel>> listPlanning = new ArrayList<List<JLabel>>();
     private List<JLabel> labelHour;
+    private List<JLabel> labelHourDay;
 
     private final JLabel connectionJLabel = new JLabel("Vous etes connecté");
 
@@ -47,6 +55,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         setSize(800, 600);
         this.modelEdt = modelEdt;
         this.controleurEdt = new CControlerEdt(this, modelEdt);
+        this.controlerPlanningWeek = new CControlerPlanningWeek(panelPlanningWeek, modelEdt);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         GridBagConstraints c = new GridBagConstraints();
@@ -70,9 +79,33 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         }
         panelPlanning.add(panel);
 
+
+        panel = new JPanel(gridLayout);
+        panel.setBackground(Color.white);
+
+        panel.add(new JLabel(listDay[0]), c);
+        for(String s: listHour)
+        {
+            panel.add(new JLabel(s));
+        }
+        panelPlanningDay.add(panel);
+
+        JPanel jPanel = new JPanel(gridLayout);
+        jPanel.setBackground(Color.white);
+        jPanel.add(new JLabel(listDay[1]));
+        labelHourDay = new ArrayList<JLabel>();
+        for(int j2=1; j2<24; j2++)
+        {
+            JLabel label = new JLabel();
+            jPanel.add(label);
+            labelHourDay.add(label);
+        }
+        panelPlanningDay.add(jPanel);
+
+
         for (int j=1; j<7; j++)
         {
-            JPanel jPanel = new JPanel(gridLayout);
+            jPanel = new JPanel(gridLayout);
             jPanel.setBackground(Color.white);
             jPanel.add(new JLabel(listDay[j]));
             labelHour = new ArrayList<JLabel>();
@@ -93,7 +126,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 1;
         c.gridx = 1;
-        panelEdt.add(panelPlanning, c);
+        //panelEdt.add(panelPlanning, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
 
@@ -111,7 +144,6 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         panelChoice.add(jButton);
 
         getContentPane().add(panelChoice, BorderLayout.SOUTH);
-       // getContentPane().add(panelEdt, BorderLayout.CENTER);
 
         buttonNotification.addActionListener(new ActionListener() {
             @Override
@@ -126,25 +158,15 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
         });
         panelChoice.add(buttonNotification);
 
-        controleurEdt.getPlanningWeek();
+        controlerPlanningWeek.getPlanningWeek(0);
+        controleurEdt.getPlanningDay();
 
-        // TEST pour savoir comment modifier la couleur et ajouter des cours
-       /** listPlanning.get(0).get(0).setText("Math");
-        listPlanning.get(0).get(0).setBackground(Color.red);
-        listPlanning.get(0).get(1).setBackground(Color.red);
-        listPlanning.get(0).get(2).setBackground(Color.red);
-        listPlanning.get(0).get(3).setBackground(Color.red);
-
-        listPlanning.get(0).get(0).setOpaque(true);
-        listPlanning.get(0).get(1).setOpaque(true);
-        listPlanning.get(0).get(2).setOpaque(true);
-        listPlanning.get(0).get(3).setOpaque(true);
-**/
-        tabbedPane.addTab("Semaine", panelEdt);
-        tabbedPane.addTab("Jour", new JPanel());
+        tabbedPane.addTab("Semaine", panelPlanningWeek);
+        tabbedPane.addTab("Jour", panelPlanningDay);
+        panelReservation = new CReservationGui();
+        tabbedPane.addTab("Reservation", panelReservation);
 
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
-//        System.out.println(modelEdt.getPlanningWeek(1));
         setVisible(true);
     }
 
@@ -153,7 +175,7 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
     }
 
     public JPanel getPanelEdt() {
-        return panelEdt;
+        return panelPlanningWeek;
     }
 
     public void updatePlanning(List<List<CCourse>> listCourse)
@@ -164,9 +186,6 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
             for(CCourse c: courseDay)
             {
                 listPlanning.get(i).get((c.getHour() - 8) * 2).setText(c.getSubject());
-                System.out.println(c.getHour());
-                System.out.println(c.getDuree());
-
                 for(int j=(c.getHour()-8)*2; j<(c.getHour()-8)*2+c.getDuree()*2; j++)
                 {
                     listPlanning.get(i).get(j).setBackground(Color.red);
@@ -174,6 +193,21 @@ public class CViewEdt extends JFrame implements IView<CModelEdt> {
                 }
             }
             i++;
+        }
+        revalidate();
+    }
+
+    public void updateDay(List<CCourse> listCourse)
+    {
+        for(CCourse c: listCourse)
+        {
+            labelHourDay.get((c.getHour() - 8) * 2).setText(c.getSubject());
+
+            for(int j=(c.getHour()-8)*2; j<(c.getHour()-8)*2+c.getDuree()*2; j++)
+            {
+                labelHourDay.get(j).setBackground(Color.red);
+                labelHourDay.get(j).setOpaque(true);
+            }
         }
         revalidate();
     }

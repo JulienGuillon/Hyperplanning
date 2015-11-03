@@ -7,8 +7,11 @@ import fr.univtln.jguillon725.projet.model.CModelPromotionChoice;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -59,13 +62,31 @@ public class CPromotionChoiceGui extends JPanel implements IView {
                 }
             }
         });
+
+        validerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    cControlerPromotionChoice.afficherPlanning();
+                } catch (PersistanceException e1) {
+                    e1.printStackTrace();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        add(panelPromotionChoice);
     }
 
     public void afficherPromotion() {
         for (CPromotion promotion : this.promotions)
         {
-            this.comboBox1.addItem(promotion.getTypePromotion()+" "+promotion.getDomainePromotion());
+            this.comboBox1.addItem(promotion);
         }
+    }
 
+    public JComboBox getComboBox1() {
+        return comboBox1;
     }
 }

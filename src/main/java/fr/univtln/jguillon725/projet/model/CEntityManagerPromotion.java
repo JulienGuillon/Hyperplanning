@@ -4,6 +4,7 @@ import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 import fr.univtln.jguillon725.projet.model.entities.CPromotion;
 import fr.univtln.jguillon725.projet.utils.DatabaseManager;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ public class CEntityManagerPromotion implements IEntity {
 
     private static PreparedStatement findAllPromotion;
     private static PreparedStatement findByLibelle;
+    private static PreparedStatement findGroup;
     private static Connection connection;
 
     //L'initialisation des preparedstatments.
@@ -26,6 +28,8 @@ public class CEntityManagerPromotion implements IEntity {
         try {
             Connection connection = DatabaseManager.getConnection();
             findAllPromotion = connection.prepareStatement("select * from PROMOTION ORDER BY TYPEPROMOTION, DOMAINEPROMOTION");
+            findGroup = connection.prepareStatement("select * from groupe WHERE groupe.idpromotion = ?");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,7 +56,7 @@ public class CEntityManagerPromotion implements IEntity {
     }
 
     public static CPromotion createFromResultSet(ResultSet pResult) throws SQLException {
-        return new CPromotion(pResult.getString("typePromotion"), pResult.getString("domainePromotion"), pResult.getInt("anneepromotion"), pResult.getInt("nombreInscrit"));
+        return new CPromotion(pResult.getInt("idpromotion"), pResult.getString("typePromotion"), pResult.getString("domainePromotion"), pResult.getInt("anneepromotion"), pResult.getInt("nombreInscrit"));
     }
 
     public static List<CPromotion> findAll() throws PersistanceException {
@@ -67,5 +71,19 @@ public class CEntityManagerPromotion implements IEntity {
             e1.printStackTrace();
         }
         return promotions;
+    }
+
+    public static List<Integer> findGroup(int promotion) throws PersistanceException {
+        List<Integer> group = new ArrayList<Integer>();
+        try {
+            findGroup.setInt(1, promotion);
+            ResultSet result = findGroup.executeQuery();
+            while (result.next()) {
+                group.add(result.getInt("idgroup"));
+            }
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return group;
     }
 }

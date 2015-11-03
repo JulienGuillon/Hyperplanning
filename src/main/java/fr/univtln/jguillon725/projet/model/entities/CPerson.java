@@ -15,7 +15,7 @@ public class CPerson implements Comparable<CPerson>{
     private RolePerson roleP;
 
     public CPerson() throws PersistanceException, SQLException {
-        roleP = new CStudent(this);
+       // roleP = new CVisitor(this);
     }
 
     public CPerson(String nom, String role, String login) throws PersistanceException, SQLException {
@@ -49,7 +49,6 @@ public class CPerson implements Comparable<CPerson>{
     }
 
     public void setRoleP(RolePerson roleP) {
-        System.out.println("h");
         this.roleP = roleP;
     }
 
@@ -81,11 +80,20 @@ public class CPerson implements Comparable<CPerson>{
                 & this.login.compareTo(o.getLogin()));
     }
 
-    public List<CCourse> findCourse(int numDay) throws PersistanceException {
-        return roleP.findCourse(numDay);
-    };
+    public List<CCourse> findCourse(int numWeek, int numDay) throws PersistanceException {
+        return roleP.findCourse(numWeek, numDay);
+    }
 
-    public void afficherPlanning() throws PersistanceException {
+    public List<CCourse> findCourse() throws PersistanceException {
+        return roleP.findCourse();
+    }
+
+    public void afficherPlanning() throws PersistanceException, SQLException {
         roleP.afficherPlanning();
+    }
+
+    public boolean[] creneauDispoDay(String date) throws PersistanceException
+    {
+        return roleP.creneauDispoDay(date);
     }
 }

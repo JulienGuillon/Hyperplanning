@@ -25,15 +25,19 @@ public class CControlerEdt {
         this.modelEdt = modelEdt;
     }
 
-    public List<CCourse> getPlanningDay(int numDay) throws PersistanceException {
-        return this.modelEdt.getPerson().findCourse(numDay);
+    public List<CCourse> getPlanningDay(int numWeek, int numDay) throws PersistanceException {
+        return this.modelEdt.getPerson().findCourse(numWeek, numDay);
     }
 
-    public void getPlanningWeek() throws PersistanceException {
+    public void getPlanningDay() throws PersistanceException {
+        viewEdt.updateDay(this.modelEdt.getPerson().findCourse());
+    }
+
+    public void getPlanningWeek(int numWeek) throws PersistanceException {
         List<List<CCourse>> listPlanning = new ArrayList<List<CCourse>>();
         for(int i=1; i<7; i++)
         {
-            listPlanning.add(getPlanningDay(i));
+            listPlanning.add(getPlanningDay(numWeek, i));
         }
         viewEdt.updatePlanning(listPlanning);
     }

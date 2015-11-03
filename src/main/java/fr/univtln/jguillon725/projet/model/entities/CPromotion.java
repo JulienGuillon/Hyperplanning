@@ -4,22 +4,33 @@ package fr.univtln.jguillon725.projet.model.entities;
  * Created by julien on 22/10/15.
  */
 public class CPromotion {
+    private int idPromotion;
     private String typePromotion;
     private String domainePromotion;
     private int anneePromotion;
     private int nombreInscrit;
 
-    public CPromotion(String typePromotion, String domainePromotion, int anneePromotion) {
+    public CPromotion(int idPromotion, String typePromotion, String domainePromotion, int anneePromotion) {
+        this.idPromotion = idPromotion;
         this.typePromotion = typePromotion;
         this.domainePromotion = domainePromotion;
         this.anneePromotion = anneePromotion;
     }
 
-    public CPromotion(String typePromotion, String domainePromotion, int anneePromotion, int nombreInscrit) {
+    public CPromotion(int idPromotion, String typePromotion, String domainePromotion, int anneePromotion, int nombreInscrit) {
+        this.idPromotion = idPromotion;
         this.typePromotion = typePromotion;
         this.domainePromotion = domainePromotion;
         this.anneePromotion = anneePromotion;
         this.nombreInscrit = nombreInscrit;
+    }
+
+    public int getIdPromotion() {
+        return idPromotion;
+    }
+
+    public void setIdPromotion(int idPromotion) {
+        this.idPromotion = idPromotion;
     }
 
     public String getTypePromotion() {
@@ -59,22 +70,29 @@ public class CPromotion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CPromotion that = (CPromotion) o;
+        CPromotion promotion = (CPromotion) o;
 
-        if (anneePromotion != that.anneePromotion) return false;
-        if (nombreInscrit != that.nombreInscrit) return false;
-        if (typePromotion != null ? !typePromotion.equals(that.typePromotion) : that.typePromotion != null)
+        if (idPromotion != promotion.idPromotion) return false;
+        if (anneePromotion != promotion.anneePromotion) return false;
+        if (nombreInscrit != promotion.nombreInscrit) return false;
+        if (typePromotion != null ? !typePromotion.equals(promotion.typePromotion) : promotion.typePromotion != null)
             return false;
-        return !(domainePromotion != null ? !domainePromotion.equals(that.domainePromotion) : that.domainePromotion != null);
+        return !(domainePromotion != null ? !domainePromotion.equals(promotion.domainePromotion) : promotion.domainePromotion != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = typePromotion != null ? typePromotion.hashCode() : 0;
+        int result = idPromotion;
+        result = 31 * result + (typePromotion != null ? typePromotion.hashCode() : 0);
         result = 31 * result + (domainePromotion != null ? domainePromotion.hashCode() : 0);
         result = 31 * result + anneePromotion;
         result = 31 * result + nombreInscrit;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return typePromotion +" "+ domainePromotion;
     }
 }

@@ -39,7 +39,7 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
 
         this.modeleLogin = modeleLogin;
         this.controleurLogin = new CControleurLogin(this, modeleLogin);
-
+        setLayout(new GridBagLayout());
         connexionJButton.setEnabled(false);
         connexionJButton.addActionListener(new ActionListener() {
             @Override
@@ -68,28 +68,27 @@ public class CLoginGui extends JPanel implements IView<CModelLogin> {
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 1;
-        loginPanel.add(loginJLabel, c);
+        add(loginJLabel, c);
 
         c.gridx = 1;
         c.gridy = 0;
-        loginPanel.add(loginJTextField, c);
+        add(loginJTextField, c);
 
         c.gridx = 0;
         c.gridy = 1;
-        loginPanel.add(passwordJLabel, c);
+        add(passwordJLabel, c);
 
         c.gridx = 1;
         c.gridy = 1;
-        loginPanel.add(passwordJTextField, c);
+        add(passwordJTextField, c);
 
         c.gridx = 0;
         c.gridy = 2;
-        loginPanel.add(connexionJButton, c);
+        add(connexionJButton, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        add(loginPanel, BorderLayout.CENTER);
     }
 
     public void setConnexionOk(boolean connexionOk) {

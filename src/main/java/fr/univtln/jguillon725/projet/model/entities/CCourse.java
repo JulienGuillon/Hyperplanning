@@ -7,24 +7,23 @@ import java.util.Date;
  * Created by julien on 17/10/15.
  */
 public class CCourse {
-    private int numDay;
+    private Date numDay;
     private int hour;
-
-    private int idWeek;
+    private String typeCours;
     private String subject;
     private int duree;
 
-    public CCourse(int pNumDay, String pSubject) {
+    public CCourse(Date pNumDay, String pSubject) {
         this.numDay = pNumDay;
         this.subject = pSubject;
     }
 
-    public CCourse(int pNumDay, int pIdWeek, String pSubject, int pDuree, int pHour) {
-        this.idWeek = pIdWeek;
+    public CCourse(Date pNumDay, String pSubject, int pDuree, int pHour, String typeCours) {
         this.numDay = pNumDay;
         this.subject = pSubject;
         this.duree = pDuree;
         this.hour = pHour;
+        this.typeCours = typeCours;
     }
 
     public int getHour() {
@@ -39,14 +38,6 @@ public class CCourse {
 
     public void setDuree(int duree) { this.duree = duree; }
 
-    public int getIdWeek() {
-        return idWeek;
-    }
-
-    public void setIdWeek(int idWeek) {
-        this.idWeek = idWeek;
-    }
-
     public String getSubject() {
         return subject;
     }
@@ -55,12 +46,16 @@ public class CCourse {
         this.subject = subject;
     }
 
-    public int getNumDay() {
+    public Date getNumDay() {
         return numDay;
     }
 
-    public void setNumDay(int numDay) {
+    public void setNumDay(Date numDay) {
         this.numDay = numDay;
+    }
+
+    public String getTypeCours() {
+        return typeCours;
     }
 
     @Override
@@ -68,21 +63,23 @@ public class CCourse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CCourse cCourse = (CCourse) o;
+        CCourse course = (CCourse) o;
 
-        if (numDay != cCourse.numDay) return false;
-        if (hour != cCourse.hour) return false;
-        if (idWeek != cCourse.idWeek) return false;
-        return !(subject != null ? !subject.equals(cCourse.subject) : cCourse.subject != null);
+        if (hour != course.hour) return false;
+        if (duree != course.duree) return false;
+        if (numDay != null ? !numDay.equals(course.numDay) : course.numDay != null) return false;
+        if (typeCours != null ? !typeCours.equals(course.typeCours) : course.typeCours != null) return false;
+        return !(subject != null ? !subject.equals(course.subject) : course.subject != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = numDay;
+        int result = numDay != null ? numDay.hashCode() : 0;
         result = 31 * result + hour;
-        result = 31 * result + idWeek;
+        result = 31 * result + (typeCours != null ? typeCours.hashCode() : 0);
         result = 31 * result + (subject != null ? subject.hashCode() : 0);
+        result = 31 * result + duree;
         return result;
     }
 }

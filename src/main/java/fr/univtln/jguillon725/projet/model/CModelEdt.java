@@ -1,5 +1,6 @@
 package fr.univtln.jguillon725.projet.model;
 
+import fr.univtln.jguillon725.projet.Ihm;
 import fr.univtln.jguillon725.projet.exceptions.PersistanceException;
 import fr.univtln.jguillon725.projet.model.entities.CCourse;
 import fr.univtln.jguillon725.projet.model.entities.CPerson;
@@ -17,11 +18,9 @@ public class CModelEdt extends Observable implements Observer{
     private int month;
     private int firtsDayOfWeek;
 
-    public CModelEdt(){};
-
-    public CModelEdt(CPerson person)
+    public CModelEdt()
     {
-        this.person = person;
+        this.person = Ihm.person;
     }
 
     public void setPerson(CPerson person) {
@@ -38,16 +37,16 @@ public class CModelEdt extends Observable implements Observer{
         notifyObservers();
     }
 
-    public List<CCourse> getPlanningWeek(int numDay) throws PersistanceException {
+    public List<CCourse> getPlanningWeek(int numWeek, int numDay) throws PersistanceException {
         Calendar cal = Calendar.getInstance();
         List<CCourse> listCourseByDay;
-        this.week = cal.get(Calendar.WEEK_OF_YEAR);
+        this.week = cal.get(Calendar.WEEK_OF_YEAR) + numWeek;
         this.year = cal.get(Calendar.YEAR);
         this.month = cal.get(Calendar.MONTH);
         cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         this.firtsDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         numDay = this.firtsDayOfWeek + numDay - 1;
-        listCourseByDay = person.findCourse(numDay);
+        listCourseByDay = person.findCourse(week, numDay);
         //listCourseByDay = CEntityManagerCourse.findByDay(numDay, person);
         return listCourseByDay;
     }

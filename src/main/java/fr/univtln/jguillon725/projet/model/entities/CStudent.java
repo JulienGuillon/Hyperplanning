@@ -5,7 +5,10 @@ import fr.univtln.jguillon725.projet.gui.CViewEdt;
 import fr.univtln.jguillon725.projet.model.*;
 import fr.univtln.jguillon725.projet.utils.Read;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -65,22 +68,37 @@ public class CStudent implements RolePerson {
         this.institut = institut;
     }
 
-    public List<CCourse> findCourse(int numDay) throws PersistanceException {
+    public List<CCourse> findCourse(int numWeek, int numDay) throws PersistanceException {
         Calendar cal = Calendar.getInstance();
-        List<CCourse> listCourseByDay;
-        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        int week = cal.get(Calendar.WEEK_OF_YEAR) + numWeek;
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         int firtsDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         numDay = firtsDayOfWeek + numDay - 1;
-        return CEntityManagerCourse.findByDay(numDay, this);
+        String date = String.valueOf(year)+'-'+String.valueOf(month)+'-'+String.valueOf(numDay);
+        return CEntityManagerCourse.findByDay(date, this);
     };
 
+    public List<CCourse> findCourse() throws PersistanceException {
+        Calendar cal = Calendar.getInstance();
+        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+        int firtsDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
+        String date = String.valueOf(year)+'-'+String.valueOf(month)+'-'+String.valueOf(firtsDayOfWeek);
+        return CEntityManagerCourse.findByDay(date, this);
+    };
 
-    public void afficherPlanning() throws PersistanceException {
-        CModelEdt modelEdt = new CModelEdt(person);
+    public void afficherPlanning() throws PersistanceException, SQLException {
+        CModelEdt modelEdt = new CModelEdt();
         CViewEdt viewEdt = new CViewEdt(modelEdt);
+    }
+
+    @Override
+    public boolean[] creneauDispoDay(String date) throws PersistanceException {
+        return null;
     }
 
 }
