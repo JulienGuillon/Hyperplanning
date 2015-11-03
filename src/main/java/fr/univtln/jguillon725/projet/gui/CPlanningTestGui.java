@@ -49,7 +49,7 @@ public class CPlanningTestGui extends JPanel {
         this.controleurPlanningWeek = new CControlerPlanningWeek(new CPlanningWeekGui(), modelePlanningWeek);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH;
 
         buttonprevious.addActionListener(new ActionListener() {
             @Override
@@ -69,7 +69,7 @@ public class CPlanningTestGui extends JPanel {
         for (String s: listDay)
         {
             c.gridx = c.gridx + 1;
-            panelPlanning.add(new JLabel(listDay[0]), c);
+            panelPlanning.add(new JLabel(s), c);
         }
 
         c.gridx = 0;
@@ -83,7 +83,11 @@ public class CPlanningTestGui extends JPanel {
 
         c.gridx = 3;
         c.gridy = 6;
-        panelPlanning.add(new JLabel("hello"), c);
+        c.gridheight = 5;
+        JPanel labee = new JPanel();
+        labee.setOpaque(true);
+        labee.setBackground(Color.red);
+        panelPlanning.add(labee, c);
 
        /** for (int j=1; j<7; j++) {
             panelPlanning.add(new JLabel(listDay[j]));
@@ -105,6 +109,7 @@ public class CPlanningTestGui extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 1;
         c.gridx = 1;
+        c.gridheight = 1;
         add(panelPlanning, c);
         c.gridy = 2;
         panelButton.add(buttonprevious);
