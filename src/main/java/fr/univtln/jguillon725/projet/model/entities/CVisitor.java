@@ -29,8 +29,12 @@ public class CVisitor implements RolePerson {
         Calendar cal = Calendar.getInstance();
         int week = cal.get(Calendar.WEEK_OF_YEAR) + numWeek;
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+
+        cal.set(Calendar.WEEK_OF_YEAR, week);
         cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+        cal.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+
+        int month = cal.get(Calendar.MONTH) + 1;
         int firstDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         numDay = firstDayOfWeek + numDay - 1;
         String date = String.valueOf(year)+'-'+String.valueOf(month)+'-'+String.valueOf(numDay);
@@ -43,9 +47,7 @@ public class CVisitor implements RolePerson {
         int week = cal.get(Calendar.WEEK_OF_YEAR);
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
-        cal.set(Calendar.WEEK_OF_YEAR, week);
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        System.out.println();
         int firstDayOfWeek = cal.get(Calendar.DAY_OF_MONTH);
         String date = String.valueOf(year)+'-'+String.valueOf(month)+'-'+String.valueOf(firstDayOfWeek);
         return CEntityManagerCourse.findByDayPromotion(date, choicePromotion);    }
